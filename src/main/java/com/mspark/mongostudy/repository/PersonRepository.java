@@ -1,12 +1,13 @@
 package com.mspark.mongostudy.repository;
 
-import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.mspark.mongostudy.dto.Person;
 
-import reactor.core.publisher.Flux;
+public interface PersonRepository extends MongoRepository<Person, String> {
 
-public interface PersonRepository extends ReactiveMongoRepository<Person, String> {
-
-	Flux<Person> findByJob(String job);
+	Optional<List<Person>> findByJob(String job);
 }

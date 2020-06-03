@@ -2,6 +2,7 @@ package com.mspark.mongostudy.reopository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.junit.jupiter.api.Test;
@@ -24,11 +25,11 @@ public class ProfileRepositoryTest {
 		
 		Profile userProfile = Profile.builder().id(userid).email("testEmail").phonenumber("01012345678").name("aaaa").build();
 		
-		profileRepository.save(userProfile).block();
+		profileRepository.save(userProfile);
 		
-		Profile expectedProfile = profileRepository.findById(userid).block();
+		Optional<Profile> expectedProfile = profileRepository.findById(userid);
 		
-		assertThat(expectedProfile).isEqualTo(userProfile);
+		assertThat(expectedProfile.get()).isEqualTo(userProfile);
 		
 	}
 }
