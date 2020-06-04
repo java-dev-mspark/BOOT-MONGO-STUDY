@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
-import com.mspark.mongostudy.dto.Person;
+import com.mspark.mongostudy.domain.Person;
 import com.mspark.mongostudy.repository.PersonRepository;
 
 @DataMongoTest

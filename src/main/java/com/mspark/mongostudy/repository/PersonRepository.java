@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.mspark.mongostudy.dto.Person;
+import com.mspark.mongostudy.domain.Person;
 
 public interface PersonRepository extends MongoRepository<Person, String> {
 
