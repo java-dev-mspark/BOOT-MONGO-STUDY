@@ -14,7 +14,7 @@ public class CommonResponse {
 	
 	private String message;
 	
-	protected CommonResponse(int code, String message) {
+	public CommonResponse(int code, String message) {
 		this.code = code;
 		this.message = message;
 	}

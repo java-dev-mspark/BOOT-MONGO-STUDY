@@ -1,15 +1,14 @@
 package com.mspark.mongostudy.web.model.req;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import lombok.AllArgsConstructor;
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter @Setter @ToString 
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
+@ApiModel(parent = CommonProfileRequest.class)
 public class BasicInfoRequest extends CommonProfileRequest{
 	
 	private String name;
@@ -18,5 +17,11 @@ public class BasicInfoRequest extends CommonProfileRequest{
 	
 	private String phonenumber;
 	
-	private MultipartFile image;
+	public BasicInfoRequest(String userid, String name, String email, String phonenumber) {
+		super(userid);
+		this.name = name;
+		this.email = email;
+		this.phonenumber = phonenumber;
+	}
+	
 }

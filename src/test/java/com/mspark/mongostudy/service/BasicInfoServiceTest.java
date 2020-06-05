@@ -9,22 +9,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.mspark.mongostudy.domain.BasicInfo;
 import com.mspark.mongostudy.repository.BasicInfoRepository;
@@ -46,14 +38,13 @@ public class BasicInfoServiceTest {
 	
 	@Test
 	@DisplayName(value ="BasicInfo 조회 테스트")
-	public void get_basic_info_test() throws FileNotFoundException, IOException {
+	public void get_basic_info_test() {
 		//Given
 		String userid = UUID.randomUUID().toString();
 		String name = "name";
 		String email = "email";
 		String phoneNumber = "01012345678";
 		
-		MultipartFile multipartFile = new MockMultipartFile("test.png", new FileInputStream(new ClassPathResource("/test.png").getFile()));
 		
 		BasicInfo userProfile = BasicInfo
 									.builder()
@@ -61,7 +52,6 @@ public class BasicInfoServiceTest {
 									.name(name)
 									.email(email)
 									.phonenumber(phoneNumber)
-									.image(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()))
 									.build();
 		
 		when(basicInfoRepository.findById(userid)).thenReturn(Optional.of(userProfile));
@@ -80,7 +70,7 @@ public class BasicInfoServiceTest {
 	
 	@Test
 	@DisplayName(value ="BasicInfo 저장 테스트")
-	public void save_basic_info_test() throws FileNotFoundException, IOException {
+	public void save_basic_info_test() {
 
 		//Given
 		String userid = UUID.randomUUID().toString();
@@ -88,18 +78,15 @@ public class BasicInfoServiceTest {
 		String email = "email";
 		String phoneNumber = "01012345678";
 		
-		MultipartFile multipartFile = new MockMultipartFile("test.png", new FileInputStream(new ClassPathResource("/test.png").getFile()));
-		
 		BasicInfo userProfile = BasicInfo
 									.builder()
 									.id(userid)
 									.name(name)
 									.email(email)
 									.phonenumber(phoneNumber)
-									.image(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()))
 									.build();
 		
-		BasicInfoRequest request = new BasicInfoRequest(name, email, phoneNumber, multipartFile);
+		BasicInfoRequest request = new BasicInfoRequest(userid, name, email, phoneNumber);
 		
 		when(basicInfoRepository.save(any(BasicInfo.class))).thenReturn(userProfile);
 		when(basicInfoRepository.findById(userid)).thenReturn(Optional.of(userProfile));

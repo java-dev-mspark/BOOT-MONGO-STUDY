@@ -1,10 +1,7 @@
 package com.mspark.mongostudy.service.impl;
 
-import java.io.IOException;
 import java.util.Optional;
 
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -22,11 +19,11 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 	private final BasicInfoRepository basicInfoRepository;
 	
 	@Override
-	public BasicInfo getBasicInfo(String userid) {
-		Assert.notNull(userid, "The userid param is required");
-		Assert.hasLength(userid, "The userid param must not empty");
+	public BasicInfo getBasicInfo(String memberid) {
+		Assert.notNull(memberid, "The memberid param is required");
+		Assert.hasLength(memberid, "The memberid param must not empty");
 		
-		Optional<BasicInfo> basicInfo = basicInfoRepository.findById(userid);
+		Optional<BasicInfo> basicInfo = basicInfoRepository.findById(memberid);
 		
 		return basicInfo.orElseThrow(() -> new IllegalStateException("No Data"));
 	}
@@ -36,25 +33,18 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 		Assert.notNull(request, "The request param is required");
 	
 		Optional<BasicInfo> optionalBasicInfo = basicInfoRepository.findById(request.getUserid());
-		BasicInfo basicInfo = null;
-		try {
-			basicInfo = optionalBasicInfo.orElse(BasicInfo
-													.builder()
-													.id(request.getUserid())
-													.name(request.getName())
-													.email(request.getEmail())
-													.phonenumber(request.getPhonenumber())
-													.image(new Binary(BsonBinarySubType.BINARY, request.getImage().getBytes()))
-													.build());
-			
-			if(optionalBasicInfo.isPresent()) {
-				basicInfo.update(request);
-			}
-		}
-		catch (IOException e) {
-			throw new IllegalStateException(e);
-		}
+		BasicInfo basicInfo 
+			= optionalBasicInfo.orElse(BasicInfo
+										.builder()
+										.id(request.getUserid())
+										.name(request.getName())
+										.email(request.getEmail())
+										.phonenumber(request.getPhonenumber())
+										.build());
 		
+		if(optionalBasicInfo.isPresent()) {
+			basicInfo.update(request);
+		}
 		return basicInfoRepository.save(basicInfo);
 	}
 	

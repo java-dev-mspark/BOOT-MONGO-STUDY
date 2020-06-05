@@ -4,20 +4,14 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.bson.BsonBinarySubType;
-import org.bson.types.Binary;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.mspark.mongostudy.domain.BasicInfo;
 import com.mspark.mongostudy.repository.BasicInfoRepository;
@@ -29,11 +23,10 @@ public class BasicInfoRepositoryTest {
 	BasicInfoRepository basicInfoRepository;
 	
 	@Test
-	public void save_test() throws FileNotFoundException, IOException {
+	public void save_test() {
 
 		//Given
 		String userid = UUID.randomUUID().toString();
-		MultipartFile multipartFile = new MockMultipartFile("test.png", new FileInputStream(new ClassPathResource("/test.png").getFile()));
 		
 		BasicInfo userProfile = BasicInfo
 									.builder()
@@ -41,7 +34,6 @@ public class BasicInfoRepositoryTest {
 									.name("name")
 									.email("testEmail")
 									.phonenumber("01012345678")
-									.image(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()))
 									.build();
 		
 		//When
@@ -59,7 +51,6 @@ public class BasicInfoRepositoryTest {
 
 		//Given
 		String userid = UUID.randomUUID().toString();
-		MultipartFile multipartFile = new MockMultipartFile("test.png", new FileInputStream(new ClassPathResource("/test.png").getFile()));
 		
 		BasicInfo userProfile = BasicInfo
 									.builder()
@@ -67,7 +58,6 @@ public class BasicInfoRepositoryTest {
 									.name("name")
 									.email("testEmail")
 									.phonenumber("01012345678")
-									.image(new Binary(BsonBinarySubType.BINARY, multipartFile.getBytes()))
 									.build();
 		
 		//Insert and Select
