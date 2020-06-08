@@ -13,8 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
-import com.mspark.mongostudy.domain.BasicInfo;
-import com.mspark.mongostudy.repository.BasicInfoRepository;
+import com.mspark.mongostudy.domain.mongo.BasicInfo;
+import com.mspark.mongostudy.repository.mongo.BasicInfoRepository;
 
 @DataMongoTest
 public class BasicInfoRepositoryTest {

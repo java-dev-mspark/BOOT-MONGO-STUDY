@@ -20,10 +20,8 @@ import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.client.MongoDatabase;
-import com.mspark.mongostudy.domain.BasicInfo;
-import com.mspark.mongostudy.domain.Person;
-import com.mspark.mongostudy.repository.BasicInfoRepository;
-import com.mspark.mongostudy.repository.PersonRepository;
+import com.mspark.mongostudy.domain.mongo.BasicInfo;
+import com.mspark.mongostudy.repository.mongo.BasicInfoRepository;
 
 
 @SpringBootApplication
@@ -36,9 +34,6 @@ public class MongoDbStudyApplication {
 	MongoTemplate mongoTemplate;
 	
 	@Autowired
-	PersonRepository personRepository;
-
-	@Autowired
 	BasicInfoRepository basicInfoRepository;
 	
 	public static void main(String[] args) {
@@ -48,20 +43,6 @@ public class MongoDbStudyApplication {
 	@Bean
 	public ApplicationRunner applicationRunner() {
 		return args ->{
-//			MongoDatabase db = mongoDatabaseFactory.getMongoDatabase();
-//			db.getCollection("person").insertOne(new Document().append("name", "minsoo").append("job", "developer"));
-//			
-//			mongoTemplate.insert(Person.builder().name("noni").job("developer").build());
-//		
-//			personRepository.deleteAll();
-//			
-//			Person p1 = Person.builder().name("test").job("test").build();
-//			Person p2 = Person.builder().name("test2").job("test").build();
-//
-//			personRepository.save(p1);
-//			personRepository.save(p2);
-//			
-//			personRepository.findByJob("test").ifPresent(list -> list.toString());
 			
 //			Base64.getEncoder().encodeToString(Files.readAllBytes(new ClassPathResource("/test.png").getFile().toPath()));
 //			

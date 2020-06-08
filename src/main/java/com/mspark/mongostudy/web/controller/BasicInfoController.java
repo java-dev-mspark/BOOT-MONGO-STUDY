@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mspark.mongostudy.constant.Code;
-import com.mspark.mongostudy.domain.BasicInfo;
+import com.mspark.mongostudy.domain.mongo.BasicInfo;
 import com.mspark.mongostudy.service.BasicInfoService;
 import com.mspark.mongostudy.web.model.req.BasicInfoRequest;
 import com.mspark.mongostudy.web.model.resp.BasicInfoResponse;

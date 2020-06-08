@@ -5,8 +5,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.mspark.mongostudy.domain.BasicInfo;
-import com.mspark.mongostudy.repository.BasicInfoRepository;
+import com.mspark.mongostudy.domain.mongo.BasicInfo;
+import com.mspark.mongostudy.repository.mongo.BasicInfoRepository;
 import com.mspark.mongostudy.service.BasicInfoService;
 import com.mspark.mongostudy.web.model.req.BasicInfoRequest;
 

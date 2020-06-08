@@ -18,8 +18,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mspark.mongostudy.domain.BasicInfo;
-import com.mspark.mongostudy.repository.BasicInfoRepository;
+import com.mspark.mongostudy.domain.mongo.BasicInfo;
+import com.mspark.mongostudy.repository.mongo.BasicInfoRepository;
 import com.mspark.mongostudy.service.impl.BasicInfoServiceImpl;
 import com.mspark.mongostudy.web.model.req.BasicInfoRequest;
 
