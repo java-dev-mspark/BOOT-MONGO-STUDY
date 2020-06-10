@@ -3,6 +3,7 @@ package com.mspark.mongostudy.service.impl;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import com.mspark.mongostudy.domain.mongo.basic.BasicInfo;
@@ -32,6 +33,7 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 	}
 
 	@Override
+	@Transactional
 	public BasicInfo save(BasicInfoRequest request) {
 		Assert.notNull(request, "The request param is required");
 
