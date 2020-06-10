@@ -1,6 +1,6 @@
 package com.mspark.mongostudy.web.model.resp;
 
-import com.mspark.mongostudy.domain.mongo.BasicInfo;
+import com.mspark.mongostudy.domain.mongo.basic.BasicInfo;
 
 import lombok.AccessLevel;
 import lombok.Builder;

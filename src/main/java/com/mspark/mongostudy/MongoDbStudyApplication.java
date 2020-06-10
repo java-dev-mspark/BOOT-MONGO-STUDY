@@ -20,7 +20,7 @@ import org.springframework.data.mongodb.MongoDatabaseFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 
 import com.mongodb.client.MongoDatabase;
-import com.mspark.mongostudy.domain.mongo.BasicInfo;
+import com.mspark.mongostudy.domain.mongo.basic.BasicInfo;
 import com.mspark.mongostudy.repository.mongo.BasicInfoRepository;
 
 

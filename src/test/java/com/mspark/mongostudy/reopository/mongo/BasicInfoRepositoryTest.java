@@ -1,4 +1,4 @@
-package com.mspark.mongostudy.reopository;
+package com.mspark.mongostudy.reopository.mongo;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
 
-import com.mspark.mongostudy.domain.mongo.BasicInfo;
+import com.mspark.mongostudy.domain.mongo.basic.BasicInfo;
 import com.mspark.mongostudy.repository.mongo.BasicInfoRepository;
 
 @DataMongoTest

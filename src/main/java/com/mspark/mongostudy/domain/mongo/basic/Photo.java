@@ -1,4 +1,4 @@
-package com.mspark.mongostudy.domain.mongo;
+package com.mspark.mongostudy.domain.mongo.basic;
 
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;

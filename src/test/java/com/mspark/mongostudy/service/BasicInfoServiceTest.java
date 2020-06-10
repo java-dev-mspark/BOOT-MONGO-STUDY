@@ -18,8 +18,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mspark.mongostudy.domain.mongo.BasicInfo;
+import com.mspark.mongostudy.domain.mongo.basic.BasicInfo;
+import com.mspark.mongostudy.domain.mysql.Member;
 import com.mspark.mongostudy.repository.mongo.BasicInfoRepository;
+import com.mspark.mongostudy.repository.mysql.MemberRepository;
 import com.mspark.mongostudy.service.impl.BasicInfoServiceImpl;
 import com.mspark.mongostudy.web.model.req.BasicInfoRequest;
 
@@ -29,11 +31,14 @@ public class BasicInfoServiceTest {
 	@Mock
 	BasicInfoRepository basicInfoRepository;
 	
+	@Mock
+	MemberRepository memberRepository;
+	
 	BasicInfoServiceImpl basicInfoService;
 	
 	@BeforeEach
 	void init() {
-		basicInfoService = new BasicInfoServiceImpl(basicInfoRepository);
+		basicInfoService = new BasicInfoServiceImpl(basicInfoRepository, memberRepository);
 	}
 	
 	@Test
@@ -72,11 +77,14 @@ public class BasicInfoServiceTest {
 	@DisplayName(value ="BasicInfo 저장 테스트")
 	public void save_basic_info_test() {
 
+		
 		//Given
 		String userid = UUID.randomUUID().toString();
 		String name = "name";
 		String email = "email";
 		String phoneNumber = "01012345678";
+		
+		Member member = new Member(userid, "member");
 		
 		BasicInfo userProfile = BasicInfo
 									.builder()
@@ -86,12 +94,15 @@ public class BasicInfoServiceTest {
 									.phonenumber(phoneNumber)
 									.build();
 		
+		BasicInfoRequest errorRequest = new BasicInfoRequest("errorUserId", name, email, phoneNumber);
 		BasicInfoRequest request = new BasicInfoRequest(userid, name, email, phoneNumber);
 		
 		when(basicInfoRepository.save(any(BasicInfo.class))).thenReturn(userProfile);
 		when(basicInfoRepository.findById(userid)).thenReturn(Optional.of(userProfile));
+		when(memberRepository.findById(userid)).thenReturn(Optional.of(member));
 		
 		assertThrows(IllegalArgumentException.class, ()->{basicInfoService.save(null);}, "파라미터 객체가 넘어오지 않은경우 예외가 발생한다");
+		assertThrows(IllegalArgumentException.class, ()->{basicInfoService.save(errorRequest);}, "넘어온 userid로 member가 조회되지 않으면 예외가 발생한다");
 		assertThat("저장이 되면 객체를 리턴한다", basicInfoService.save(request), is(equalTo(userProfile)));
 	}
 	

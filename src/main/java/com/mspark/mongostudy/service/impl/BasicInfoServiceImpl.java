@@ -5,8 +5,10 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import com.mspark.mongostudy.domain.mongo.BasicInfo;
+import com.mspark.mongostudy.domain.mongo.basic.BasicInfo;
+import com.mspark.mongostudy.domain.mysql.Member;
 import com.mspark.mongostudy.repository.mongo.BasicInfoRepository;
+import com.mspark.mongostudy.repository.mysql.MemberRepository;
 import com.mspark.mongostudy.service.BasicInfoService;
 import com.mspark.mongostudy.web.model.req.BasicInfoRequest;
 
@@ -17,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 public class BasicInfoServiceImpl implements BasicInfoService {
 
 	private final BasicInfoRepository basicInfoRepository;
+	private final MemberRepository memberRepository;
 	
 	@Override
 	public BasicInfo getBasicInfo(String memberid) {
@@ -31,7 +34,11 @@ public class BasicInfoServiceImpl implements BasicInfoService {
 	@Override
 	public BasicInfo save(BasicInfoRequest request) {
 		Assert.notNull(request, "The request param is required");
+
+		Optional<Member> memberOptional = memberRepository.findById(request.getUserid());
 	
+		Assert.isTrue(memberOptional.isPresent(), "There are no Member by requestedUserid");
+		
 		Optional<BasicInfo> optionalBasicInfo = basicInfoRepository.findById(request.getUserid());
 		BasicInfo basicInfo 
 			= optionalBasicInfo.orElse(BasicInfo

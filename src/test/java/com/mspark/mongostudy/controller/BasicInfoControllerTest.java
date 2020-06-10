@@ -19,15 +19,19 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mspark.mongostudy.domain.mysql.Member;
+import com.mspark.mongostudy.repository.mysql.MemberRepository;
 import com.mspark.mongostudy.web.model.req.BasicInfoRequest;
 import com.mspark.mongostudy.web.model.resp.BasicInfoResponse;
 
 @WebAppConfiguration
 @SpringBootTest
+@Transactional
 public class BasicInfoControllerTest {
 
 	@Autowired
@@ -35,6 +39,9 @@ public class BasicInfoControllerTest {
 	
 	@Autowired
 	private ObjectMapper objectMapper;
+	
+	@Autowired
+	private MemberRepository memberRepository;
 	
 	private MockMvc mockMvc;
 	
@@ -50,7 +57,10 @@ public class BasicInfoControllerTest {
 		String email = "aaa@aaa.com";
 		String phonenumber = "01012341234";
 		
+		Member member = new Member(userid, "member");
 		BasicInfoRequest request = new BasicInfoRequest(userid, name, email, phonenumber);
+		
+		memberRepository.save(member);
 		
 		String content = objectMapper.writeValueAsString(request);
 		
@@ -70,7 +80,10 @@ public class BasicInfoControllerTest {
 		String email = "aaa@aaa.com";
 		String phonenumber = "01012341234";
 		
+		Member member = new Member(userid, "member");
 		BasicInfoRequest request = new BasicInfoRequest(userid, name, email, phonenumber);
+		
+		memberRepository.save(member);
 		
 		String content = objectMapper.writeValueAsString(request);
 		
