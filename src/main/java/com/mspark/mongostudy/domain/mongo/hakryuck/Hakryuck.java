@@ -1,5 +1,6 @@
 package com.mspark.mongostudy.domain.mongo.hakryuck;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Id;
@@ -11,10 +12,11 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Document(collection = "hakryuck")
-@Getter @ToString @EqualsAndHashCode
+@Getter @Setter @ToString @EqualsAndHashCode
 @NoArgsConstructor @AllArgsConstructor
 public class Hakryuck {
 
@@ -24,6 +26,6 @@ public class Hakryuck {
 
 	private HighSchool highSchool;
 	
-	private List<University> universitis;
+	private List<University> universities = new ArrayList<University>();
 	
 }
