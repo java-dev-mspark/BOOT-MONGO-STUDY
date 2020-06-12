@@ -148,7 +148,7 @@ String userid = UUID.randomUUID().toString();
 		
 		assertThat("삭제 전 전체 로우 갯수는 1 이다", hakryuckRepository.findAll().size(), is(equalTo(1)));
 		
-		Hakryuck savedHakryuck =hakryuckRepository.findById(userid).get(); 
+		Hakryuck savedHakryuck = hakryuckRepository.findById(userid).get(); 
 		
 		hakryuckRepository.delete(savedHakryuck);
 		
